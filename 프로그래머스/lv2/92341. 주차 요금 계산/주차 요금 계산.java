@@ -62,16 +62,18 @@ class Solution {
             while(itr.hasNext())
             {   
                 Map.Entry<String, Integer> entry = itr.next();
-                // 00:00에 입차한 경우 
+                
+                // 00:00에 입차만한 경우 
                 if (map2.get(entry.getKey()) == null && map1.get(entry.getKey()) == null ){
                     map2.put(entry.getKey(),1439);
-                    //System.out.println(" itr map2 = " +map2);
+                    
+                // 00:00이 아닌 시간에 입차만 한 경우
                 } else if ( map2.get(entry.getKey()) == null){
-                    map2.put(entry.getKey(), 1439 - map1.get(entry.getKey() )); 
+                    map2.put(entry.getKey(), 1439 - map1.get(entry.getKey() ));
+                // 00:00이 아닌 시간에 입차만 했는데 그전에도 입출차를 한 경우
                 }else {
                     map2.put(entry.getKey(),map2.get(entry.getKey())-entry.getValue() +1439);
                 }
-                
             }
         }
         List<String> keySet = new ArrayList<>(map2.keySet());
@@ -79,7 +81,6 @@ class Solution {
         Collections.sort(keySet);
         
         int[] answer = new int[map2.size()];
-        
         for(int i=0; i<keySet.size(); i++ ){
             answer[i] = cntpaid(fees,map2.get(keySet.get(i)));
         }
