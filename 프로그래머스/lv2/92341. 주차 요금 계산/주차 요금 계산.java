@@ -63,14 +63,10 @@ class Solution {
             {   
                 Map.Entry<String, Integer> entry = itr.next();
                 
-                // 00:00에 입차만한 경우 
-                if (map2.get(entry.getKey()) == null && map1.get(entry.getKey()) == null ){
-                    map2.put(entry.getKey(),1439);
-                    
-                // 00:00이 아닌 시간에 입차만 한 경우
-                } else if ( map2.get(entry.getKey()) == null){
+                // 입차만한 경우 
+                if ( map2.get(entry.getKey()) == null){
                     map2.put(entry.getKey(), 1439 - map1.get(entry.getKey() ));
-                // 00:00이 아닌 시간에 입차만 했는데 그전에도 입출차를 한 경우
+                // 입차만 했는데 그전에도 입출차를 한 경우
                 }else {
                     map2.put(entry.getKey(),map2.get(entry.getKey())-entry.getValue() +1439);
                 }
